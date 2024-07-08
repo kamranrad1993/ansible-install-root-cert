@@ -1,11 +1,11 @@
 ---
 - set_fact:
-    install_root_cert_tmp_path: "{{ install_root_cert_tmp_folder }}/{{ install_root_cert_pem | basename }}"
+    install_root_cert_tmp_path: "{{ install_root_cert_tmp_folder }}/{{ root_cert_address }}"
 
 - block:
   - name: Copy certificate to temporary location
     copy:
-      src: "{{ install_root_cert_pem }}"
+      content: "{{ root_cert_content }}"
       dest: "{{ install_root_cert_tmp_path }}"
 
   - name: Add certificate to Mac OS keychain

@@ -1,9 +1,7 @@
 ---
-- name: Check that the root certificate exists
-  become: no
-  local_action: "stat path={{ install_root_cert_pem }}"
-  register: result
-  failed_when: not result.stat.exists
+- name: Get Root Certificate From Address
+  shell: "openssl s_client -showcerts -connect {{ root_cert_address }} </dev/null 2>/dev/null | openssl x509 -outform PEM"
+  register: root_cert_content
 
 - include: debian.yml
   when: ansible_os_family == "Debian"
