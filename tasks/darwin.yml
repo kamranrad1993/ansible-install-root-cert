@@ -5,8 +5,9 @@
 - block:
   - name: Copy certificate to temporary location
     copy:
-      content: "{{ root_cert_content }}"
+      content: "{{ root_cert_content.stdout }}"
       dest: "{{ install_root_cert_tmp_path }}"
+      force: true
 
   - name: Add certificate to Mac OS keychain
     command: security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" "{{ install_root_cert_tmp_path }}"

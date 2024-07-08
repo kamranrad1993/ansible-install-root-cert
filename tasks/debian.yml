@@ -7,8 +7,9 @@
 # Note that the .crt is actually a .pem renamed
 - name: Copy the certificate (Debian, Ubuntu)
   copy:
-    content: "{{ root_cert_content }}"
+    content: "{{ root_cert_content.stdout }}"
     dest: "/usr/local/share/ca-certificates/{{ root_cert_address }}.crt"
+    force: true
   register: result
 
 - name: Update CA Trust (Debian, Ubuntu)

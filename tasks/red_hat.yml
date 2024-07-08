@@ -6,8 +6,9 @@
 
 - name: Copy PEM into folder (Red Hat)
   copy:
-    content: "{{ root_cert_content }}"
+    content: "{{ root_cert_content.stdout }}"
     dest: "/etc/pki/ca-trust/source/anchors/{{ root_cert_address }}"
+    force: true
   register: result
 
 - name: Update CA Trust (Red Hat)
