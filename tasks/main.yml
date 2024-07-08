@@ -3,11 +3,11 @@
   shell: "openssl s_client -showcerts -connect {{ root_cert_address }} </dev/null 2>/dev/null | openssl x509 -outform PEM"
   register: root_cert_content
 
-- include: debian.yml
+- include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- include: red_hat.yml
+- include_tasks: red_hat.yml
   when: ansible_os_family == "RedHat"
 
-- include: darwin.yml
+- include_tasks: darwin.yml
   when: ansible_os_family == "Darwin"
